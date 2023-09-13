@@ -1,0 +1,69 @@
+<article class="login">
+    <div class="login__slogan">
+        <div class="img-container">
+            <div class="circle"></div>
+            <img src="assets/images/mls-slogan.png" alt="slogan">
+        </div>
+        <div><b> Shopping list made easy.</b></div>
+    </div>
+    <div class="login__information">
+        <mat-icon class="logo material-icons" svgIcon="msl-logo"></mat-icon>
+        <form [formGroup]="loginForm" (submit)="onSubmit()">
+            <div class="msl-text-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="pat@example.com" formControlName="email" required>
+                    <mat-error *ngIf="loginForm.get('email')?.errors">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="msl-text-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Enter your password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                            [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+
+            <div class="msl-text-container">
+                <button type="submit" mat-raised-button style="width: 100%" color="primary">Log In</button>
+            </div>
+            <a mat-stroked-button color="primary" routerLink="/sign-up">Sign Up</a>
+
+            <a mat-button routerLink="/forgot-password">Forgot password?</a>
+
+            <div class="social">
+                <div class="social__header">
+                    <div></div>
+                    <span>or</span>
+                    <div></div>
+                </div>
+                <div class="social__wrapper">
+                    <button class="google" mat-raised-button aria-label="Example icon button with a heart icon">
+                        <mat-icon svgIcon="login-social-google"></mat-icon>
+                        Sign in with Google
+                    </button>
+                    <button class="apple" mat-raised-button aria-label="Example icon button with a heart icon">
+                        <mat-icon svgIcon="login-social-apple"></mat-icon>
+                        Sign in with Apple
+                    </button>
+
+                </div>
+            </div>
+        </form>
+
+
+        <div class="download-app">
+            <p>Get the app.</p>
+            <div class="download-app__wrapper">
+                <img src="assets/images/app-download-apple.png" alt="app store">
+                <img src="assets/images/app-download-google.png" alt="google play">
+            </div>
+
+        </div>
+    </div>
+</article>

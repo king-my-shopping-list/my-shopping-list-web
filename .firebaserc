@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kings-my-shopping-list": {
+      "hosting": {
+        "my-shopping-list-web": [
+          "kings-my-shopping-list"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kings-my-shopping-list"
+  }
+}

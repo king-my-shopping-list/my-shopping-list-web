@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "my-shopping-list-web",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}
