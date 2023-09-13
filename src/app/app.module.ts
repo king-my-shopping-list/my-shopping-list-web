@@ -6,12 +6,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreFactory } from './core/store/store.factory';
-import {environment} from "../environments/environment";
+import { environment } from '../environments/environment';
+import { FirebaseConfigModule } from './core/firebase-config/firebase-config.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     HttpClientModule,
+    FirebaseConfigModule,
     CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -20,7 +22,8 @@ import {environment} from "../environments/environment";
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     {
       provide: StoreFactory,
-      useFactory: (): StoreFactory => new StoreFactory(window.localStorage, environment.prefix),
+      useFactory: (): StoreFactory =>
+        new StoreFactory(window.localStorage, environment.prefix),
     },
   ],
   bootstrap: [AppComponent],
