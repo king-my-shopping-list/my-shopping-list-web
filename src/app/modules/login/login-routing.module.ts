@@ -14,6 +14,11 @@ const routes: Routes = [
         (m) => m.ForgotPasswordModule,
       ),
   },
+  {
+    path: 'sign-up',
+    loadChildren: () =>
+      import('./components/sign-up/sign-up.module').then((m) => m.SignUpModule),
+  },
 ];
 
 @NgModule({

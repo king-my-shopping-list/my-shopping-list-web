@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { WarningError } from '../../core/interfaces/warning-error.interface';
-import { AuthService } from '../../core/api/auth/auth.service';
+import { AuthService } from '../../../../core/api/auth/auth.service';
+import { WarningError } from '../../../../core/interfaces/warning-error.interface';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class SignUpComponent {
   hide = true;
 
   loginForm: FormGroup;
@@ -18,13 +18,11 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
   ) {
     this.loginForm = this.formBuilder.group({
+      displayName: ['', [Validators.required, Validators.min(3)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      passwordNew: ['', Validators.required],
+      passwordConfirmation: ['', Validators.required],
     });
-  }
-
-  ngOnInit(): void {
-    console.log('Init');
   }
 
   getErrorMessage() {
@@ -38,7 +36,7 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.loginForm);
+    console.log(this.loginForm.value);
     if (this.loginForm.invalid) {
       throw new WarningError('Invalid form');
     }
@@ -47,7 +45,11 @@ export class LoginComponent implements OnInit {
       const userData = this.loginForm.value;
       userData.email = userData.email.trim();
 
-      await this.authService.logIn(userData.email, userData.password);
+      await this.authService.signUp(
+        userData.email,
+        userData.passwordNew,
+        userData.displayName,
+      );
     } catch (error) {
       if (error instanceof WarningError) {
         console.warn('Warning: ', error);

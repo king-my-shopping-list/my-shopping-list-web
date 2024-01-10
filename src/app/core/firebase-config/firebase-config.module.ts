@@ -10,6 +10,7 @@ import {
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [],
@@ -20,6 +21,13 @@ import { getFunctions, provideFunctions } from '@angular/fire/functions';
     provideFirestore(() => getFirestore()),
     provideFunctions(() => getFunctions()),
   ],
-  providers: [ScreenTrackingService, UserTrackingService],
+  providers: [
+    ScreenTrackingService,
+    UserTrackingService,
+    {
+      provide: FIREBASE_OPTIONS,
+      useValue: environment.firebase,
+    },
+  ],
 })
 export class FirebaseConfigModule {}

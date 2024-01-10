@@ -12,8 +12,14 @@
             <form [formGroup]="loginForm" (submit)="onSubmit()">
                 <div class="msl-text-container">
                     <mat-form-field appearance="outline">
+                        <mat-label>Enter your name</mat-label>
+                        <input matInput type="text" placeholder="Your name" formControlName="displayName" required>
+                    </mat-form-field>
+                </div>
+                <div class="msl-text-container">
+                    <mat-form-field appearance="outline">
                         <mat-label>Enter your email</mat-label>
-                        <input matInput placeholder="pat@example.com" formControlName="email" required>
+                        <input matInput type="email" placeholder="msl@msl.com" formControlName="email" required>
                         <mat-error *ngIf="loginForm.get('email')?.errors">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </div>
@@ -21,7 +27,18 @@
                 <div class="msl-text-container">
                     <mat-form-field appearance="outline">
                         <mat-label>Enter your password</mat-label>
-                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordNew">
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="msl-text-container">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Confirm your password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordConfirmation">
                         <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
                                 [attr.aria-label]="'Hide password'"
                                 [attr.aria-pressed]="hide">
@@ -31,11 +48,9 @@
                 </div>
 
                 <div class="msl-text-container">
-                    <button type="submit" mat-raised-button style="width: 100%" color="primary">Log In</button>
+                    <button type="submit" mat-raised-button style="width: 100%" color="primary">Create account</button>
                 </div>
-                <a mat-stroked-button color="primary" routerLink="sign-up">Sign Up</a>
-
-                <a mat-button routerLink="forgot-password">Forgot password?</a>
+                <a mat-stroked-button color="primary" routerLink="login">Sign In</a>
             </form>
 
             <div class="social">
